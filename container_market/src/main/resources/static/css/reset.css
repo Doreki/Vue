@@ -24,3 +24,15 @@ body {
     font-size: 11px;
     color: black;
 }
+
+button {
+    border:none;
+    background: none;
+
+    cursor: pointer;
+}
+
+.btn {
+    border: 1px solid black;
+    padding: 10px;
+}
