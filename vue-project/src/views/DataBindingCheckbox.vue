@@ -18,10 +18,9 @@ export default {
 
   data() {
     return {
-      checked: true
+      checked: true,
     };
   },
-s
   mounted() {},
 
   methods: {},
