@@ -4,20 +4,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'VueBaseCard',
-
-  data() {
-    return {};
-  },
-
-  mounted() {},
-
-  methods: {},
-};
-</script>
-
 <style scoped>
 div {
   border-radius: 12px;
