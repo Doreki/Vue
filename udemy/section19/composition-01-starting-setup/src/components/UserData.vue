@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import { computed, inject } from 'vue';
+import { computed, inject, onMounted } from 'vue';
 export default {
   props: ['firstName', 'lastName'],
   setup(props, context) {
@@ -16,6 +16,10 @@ export default {
     const age = inject('userAge');
 
     // constext.emit();
+
+    onBeforeMount(function () {
+      console.log(1);
+    });
 
     return {
       userName: uName,
