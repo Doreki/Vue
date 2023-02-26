@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    여기서부터 코드를 시작합니다!
+    <Navbar/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+import Navbar from "./components/Navbar.vue";
 export default {
-  name: 'app',
-  data () {
-    return {
-    }
+  name: "app",
+  components: { Navbar },
+  data() {
+    return {};
   }
-}
+};
 </script>
 
 <style>
