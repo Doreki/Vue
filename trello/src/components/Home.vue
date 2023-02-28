@@ -1,34 +1,43 @@
 <template>
-    <div>
-    Home
-    <div>
-        Board List:
-        <div v-if="loading">Loading...</div>
-        <div v-else>
-            <div v-for="b in boards" :key="b.id">
-            {{ b }}
-            </div>
-        </div>
-        <ul>
-            <router-link to="b/1">Board 1 </router-link> 
-            <router-link to="b/2">Board 2 </router-link> 
-        </ul>
+  <div>
+    <div class="home-title">Personal Boards</div>
+    <div class="board-list">
+      <div class="board-item" v-for="(board, i) in boardList" :key="i" :data-bgcolor="board.bgColor">
+        <router-link :to="`/board/${board.id}`">
+          <div class="board-item-title">{{board.title}}</div>
+        </router-link>
+      </div>
+      <div class="board-item">
+        <a class="new-board-btn" href="" @click.prevent="onClickCreateBoard">
+          Create new board...
+        </a>
+      </div>
     </div>
-    </div>
+    <AddBoard v-if="isAddBoard" @close="isAddBoard=false" @submit="onAddBoard"/>
+  </div>
 </template>
 
 <script>
 import { board } from "../api";
+import AddBoard from "./AddBoard.vue";
 
 export default {
+  components: { AddBoard },
   data() {
     return {
       loading: false,
-      boards: []
+      boards: [],
+      error: "",
+      isAddBoard: false
     };
   },
   created() {
     this.fetchData();
+  },
+  updated() {
+    this.$refs.boardItem.forEach(el => {
+      el.style.backgroudColor = e.dataset.bgcolor;
+    });
   },
   methods: {
     fetchData() {
@@ -41,10 +50,58 @@ export default {
         .finally(res => {
           this.loading = false;
         });
+    },
+    addBoard() {
+      this.isAddBoard = true;
+    },
+    onAddBoard(title) {
+      board.create(title).then(() => this.fetchData());
     }
   }
 };
 </script>
 
 <style >
+.home-title {
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.board-list {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.board-item {
+  width: 23%;
+  height: 100px;
+  margin: 0 2% 20px 0;
+  border-radius: 3px;
+}
+.board-item a {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.board-item a:hover,
+.board-item a:focus {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #666;
+}
+.board-item-title {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 10px;
+}
+.board-item a.new-board-btn {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  height: 100px;
+  width: inherit;
+  color: #888;
+  font-weight: 700;
+}
 </style>
