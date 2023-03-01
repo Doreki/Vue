@@ -55,7 +55,7 @@ export default {
         });
     },
     addBoard() {
-      this.isAddBoard = true;
+      // this.isAddBoard = true;
     },
     onAddBoard(title) {
       board.create(title).then(() => this.fetchData());
